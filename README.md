@@ -23,7 +23,7 @@
 ### 未来期待的实现
 - 研究每个城市的人都喜欢买什么样子的房子，价格，建筑面积在什么范围
 - 研究每个城市的房价趋势
-##多图预警
+## 多图预警
 - 时间有限，数据爬取量不是很大
 ![城市交易单价](https://github.com/ChuanLikeCode/housePrice/blob/master/%E5%9F%8E%E5%B8%82%E4%BA%A4%E6%98%93%E5%8D%95%E4%BB%B7.png?raw=true)
 ![上海](https://github.com/ChuanLikeCode/housePrice/blob/master/%E4%B8%8A%E6%B5%B7.png?raw=true)
