@@ -18,10 +18,20 @@
 - 时间有限，爬取信息需要大量时间
 ### 数据分析
 - 将获取到的数据按照格式存入mongodb中，mongdb是以键值对的方式存放数据的
-- info = {'房屋户型':'2室1厅1厨1卫','所在楼层':'低楼层','建筑面积':'54.04㎡'
-         , '户型结构': '平层','套内面积':'暂无数据','建筑类型':'板楼'
-         , '房屋朝向': '南','建成年代':'1996','装修情况':'简装'
-         , '建筑结构': '砖混结构','供暖方式':'','梯户比例':'一梯两户'
-         , '产权年限': '未知','配备电梯':'无','历史成交记录':'295万'
-	    , '单价': '54590元/平','成交时间':'2018-10-08'}
- 以这种方式存入数据库。
+ info = {<br/>'房屋户型':'2室1厅1厨1卫',<br/>'所在楼层':'低楼层',<br/>'建筑面积':'54.04㎡'<br/>, '户型结构': '平层',<br/>'套内面积':'暂无数据',<br/>'建筑类型':'板楼' , <br/>'房屋朝向': '南',<br/>'建成年代':'1996',<br/>'装修情况':'简装' , <br/>'建筑结构': '砖混结构',<br/>'供暖方式':'',<br/>'梯户比例':'一梯两户' ,<br/> '产权年限': '未知',<br/>'配备电梯':'无',<br/>'历史成交记录':'295万',<br/> '单价': '54590元/平',<br/>'成交时间':'2018-10-08'<br/>}<br/>以这种方式存入数据库
+- 读取数据库计算每个城市历史成交记录，单价，建筑面积的平均值、方差、最大数、最小数
+### 未来期待的实现
+- 研究每个城市的人都喜欢买什么样子的房子，价格，建筑面积在什么范围
+- 研究每个城市的房价趋势
+##多图预警
+- 时间有限，数据爬取量不是很大
+![城市交易单价](https://github.com/ChuanLikeCode/housePrice/blob/master/%E5%9F%8E%E5%B8%82%E4%BA%A4%E6%98%93%E5%8D%95%E4%BB%B7.png?raw=true)
+![上海](https://github.com/ChuanLikeCode/housePrice/blob/master/%E4%B8%8A%E6%B5%B7.png?raw=true)
+![东莞](https://github.com/ChuanLikeCode/housePrice/blob/master/%E4%B8%9C%E8%8E%9E.png?raw=true)
+![中山](https://github.com/ChuanLikeCode/housePrice/blob/master/%E4%B8%AD%E5%B1%B1.png?raw=true)
+![佛山](https://github.com/ChuanLikeCode/housePrice/blob/master/%E4%BD%9B%E5%B1%B1.png?raw=true)
+![厦门](https://github.com/ChuanLikeCode/housePrice/blob/master/%E5%8E%A6%E9%97%A8.png?raw=true)
+![合肥](https://github.com/ChuanLikeCode/housePrice/blob/master/%E5%90%88%E8%82%A5.png?raw=true)
+![广州](https://github.com/ChuanLikeCode/housePrice/blob/master/%E5%B9%BF%E5%B7%9E.png?raw=true)
+![深圳](https://github.com/ChuanLikeCode/housePrice/blob/master/%E6%B7%B1%E5%9C%B3.png?raw=true)
+![重庆](https://github.com/ChuanLikeCode/housePrice/blob/master/%E9%87%8D%E5%BA%86.png?raw=true)
