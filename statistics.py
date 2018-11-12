@@ -180,17 +180,80 @@ def computed():
         file.close()
         print('完成----' + fileList[i] + '-----的统计----JS---Count转换')
 
+# 计算房屋朝向
 def computedsss():
     client = MongoClient('localhost', 27017)  # 连接数据库
     db = client.house  # 连接数据库名称
-    collection = db['上海']
-    rs = collection.find()
-    df = DataFrame(list(rs)).astype({'建筑面积': 'float', '历史成交记录': 'float', '单价': 'float'})
-    reslist = df.groupby(['成交时间']).mean().reset_index()
-    print(reslist)
+    fileList = ['House','北京']
+    nameList = ['house','beijin']
+    for i in range(len(fileList)):
+        collection = db[fileList[i]]
+        rs = collection.find()
+        df = DataFrame(list(rs))
+        # df = DataFrame(list(rs)).astype({'建筑面积': 'float', '历史成交记录': 'float', '单价': 'float'})
+        reslist = df.groupby(['成交时间','房屋朝向'])
+        res_list = {}
+        for name, group in reslist:
+            if res_list.__contains__(name[0]):
+                res_list[name[0]]['date'] = name[0]
+                res_list[name[0]][name[1]] = group.shape[0]
+            else:
+                res_list[name[0]] = {'东': 0,'南': 0,'西': 0,'北': 0,'东南': 0,'东北': 0,'西南': 0,'西北': 0,'暂无数据': 0}
+                res_list[name[0]]['date'] = name[0]
+                res_list[name[0]][name[1]] = group.shape[0]
+        data_list = []
+        for name in reslist:
+            data_list.append(res_list[name[0][0]])
+        file = open('housediretion/' + fileList[i] + 'direction.js', 'w')
+        file.write('var ' + nameList[i] + 'direction = ' + str(data_list) + '\n export { ' + nameList[i] + 'direction }')
+        file.close()
+        print('完成----' + fileList[i] + '-----的统计----JS---Count转换')
+        # print(data_list)
+
+def translation_direction():
+    client = MongoClient('localhost', 27017)  # 连接数据库
+    db = client.house  # 连接数据库名称
+    fileList = ['House', '北京']
+    nameList = ['house', 'beijin']
+    for i in range(len(fileList)):
+        collection = db[fileList[i]]
+        rs = collection.find()
+        df = DataFrame(list(rs))
+        # df = DataFrame(list(rs)).astype({'建筑面积': 'float', '历史成交记录': 'float', '单价': 'float'})
+        reslist = df.groupby(['成交时间', '房屋朝向'])
+        res_list = {}
+        for name, group in reslist:
+            if res_list.__contains__(name[0]):
+                res_list[name[0]]['date'] = name[0]
+                res_list[name[0]][name[1]] = group.shape[0]
+            else:
+                res_list[name[0]] = {'东': 0, '南': 0, '西': 0, '北': 0, '东南': 0, '东北': 0, '西南': 0, '西北': 0, '暂无数据': 0}
+                res_list[name[0]]['date'] = name[0]
+                res_list[name[0]][name[1]] = group.shape[0]
+        data_list = {'date':[],'东': [], '南': [], '西': [], '北': [], '东南': [], '东北': [], '西南': [], '西北': [], '暂无数据': []}
+        res_list_keys = list(res_list.keys())
+        # print(res_list_keys[0])
+        for j in range(len(res_list_keys)):
+            data_list['date'].append(res_list[res_list_keys[j]]['date'])
+            data_list['东'].append(res_list[res_list_keys[j]]['东'])
+            data_list['南'].append(res_list[res_list_keys[j]]['南'])
+            data_list['西'].append(res_list[res_list_keys[j]]['西'])
+            data_list['北'].append(res_list[res_list_keys[j]]['北'])
+            data_list['东南'].append(res_list[res_list_keys[j]]['东南'])
+            data_list['东北'].append(res_list[res_list_keys[j]]['东北'])
+            data_list['西南'].append(res_list[res_list_keys[j]]['西南'])
+            data_list['西北'].append(res_list[res_list_keys[j]]['西北'])
+            data_list['暂无数据'].append(res_list[res_list_keys[j]]['暂无数据'])
+        file = open('housediretion/' + fileList[i] + 'direction.js', 'w')
+        file.write('var  ' + nameList[i] + 'direction = ' + str(data_list) + '\n export { ' + nameList[i] + 'direction }')
+        file.close()
+        print('完成----' + fileList[i] + '-----的统计----JS---Count转换')
+
+
 
 if __name__ == '__main__':
-    computedsss()
+    translation_direction()
+    # computedsss()
     # computed()
     # inputFileJsonBeijin()
     # beij()
